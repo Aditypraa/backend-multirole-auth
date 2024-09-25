@@ -56,3 +56,5 @@ app.use(api, productRoute);
 app.listen(process.env.PORT || 3000, () => {
   console.log(`🚀 Server is running on http://localhost:${configs.port}`);
 });
+
+export default app;
