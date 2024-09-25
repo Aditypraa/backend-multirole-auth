@@ -4,6 +4,7 @@ import session from "express-session";
 import { configs } from "./configs/index.js";
 import userRoute from "./routes/userRoute.js";
 import productRoute from "./routes/productRoute.js";
+import authRoute from "./routes/authRoute.js";
 import dbSequelize from "./configs/index.js";
 
 const app = express();
@@ -34,6 +35,7 @@ app.use(
 );
 
 // Routes
+app.use(api, authRoute);
 app.use(api, userRoute);
 app.use(api, productRoute);
 
