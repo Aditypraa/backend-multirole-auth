@@ -42,6 +42,11 @@ app.use(
 );
 
 // Routes
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Welcome to API Multi Role Authentication",
+  });
+});
 app.use(api, authRoute);
 app.use(api, userRoute);
 app.use(api, productRoute);
