@@ -4,7 +4,7 @@ import { Sequelize } from "sequelize";
 dotenv.config();
 
 export const configs = {
-  port: process.env.PORT || 3000,
+  port: process.env.APP_PORT || 3000,
   secret: process.env.SECRET_KEY,
   db: {
     host: process.env.DB_HOST,

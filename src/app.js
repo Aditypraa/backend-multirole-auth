@@ -7,10 +7,12 @@ import userRoute from "./routes/userRoute.js";
 import productRoute from "./routes/productRoute.js";
 import authRoute from "./routes/authRoute.js";
 import dbSequelize from "./configs/index.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
-let api = "/api";
+const api = "/api";
 const sessionStore = SequelizeStore(session.Store); // Session store untuk menyimpan session ke database
+
 const store = new sessionStore({
   // Inisialisasi session store
   db: dbSequelize, // Database Sequelize
@@ -27,8 +29,10 @@ dbSequelize
   });
 
 // Middlewares
-app.use(cors()); // Untuk mengizinkan akses dari frontend
+app.use(cors());
 app.use(express.json()); // Untuk membaca request body berformat JSON
+app.use(express.urlencoded({ extended: true })); // Untuk membaca request body dari form URL encoded
+app.use(cookieParser())
 app.use(
   session({
     secret: configs.secret,
@@ -51,9 +55,7 @@ app.use(api, authRoute);
 app.use(api, userRoute);
 app.use(api, productRoute);
 
-// store.sync();
-
-app.listen(process.env.PORT || 3000, () => {
+app.listen(configs.port, () => {
   console.log(`🚀 Server is running on http://localhost:${configs.port}`);
 });
 
