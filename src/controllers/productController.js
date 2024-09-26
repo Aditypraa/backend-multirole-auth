@@ -43,7 +43,7 @@ export const getProductById = async (req, res) => {
       });
     } else { // jika role bukan admin
       response = await Products.findOne({ // maka akan menampilkan data product
-        where: { [Op.and]: [{ id: product.id }, { userId: req.user }] }, // where : berdasarkan id product dan userId yang login
+        where: { [Op.and]: [{ id: product.id }, { userId: req.userId }] }, // where : berdasarkan id product dan userId yang login
         attributes: ["uuid", "name", "price"], // yang akan ditampilkan adalah uuid, name, dan price
         include: [{ model: Users, attributes: ["name", "email"] }], // dan akan menampilkan data user yang memiliki atribut name dan email
       });
