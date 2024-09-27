@@ -22,14 +22,6 @@ const Users = dbSequelize.define(
         len: [3, 255], // panjang karakter 3-255
       },
     },
-    name: {
-      type: DataTypes.STRING, // tipe data string
-      allowNull: false, // tidak boleh null
-      validate: {
-        notEmpty: true, // tidak boleh kosong
-        len: [3, 255], // panjang karakter 3-255
-      },
-    },
     email: {
       type: DataTypes.STRING, // tipe data string
       allowNull: false, // tidak boleh null
