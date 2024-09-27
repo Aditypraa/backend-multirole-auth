@@ -4,6 +4,10 @@
 
 <p id="description">Proyek ini berfokus pada pengembangan backend yang aman dan handal untuk sistem otentikasi multi-peran. Dengan menggunakan teknologi seperti Express.js MySQL Sequelize dan Argon2 proyek ini akan menyediakan fungsionalitas berikut:</p>
 
+<h2>📃 Dokumentasi Postman : </h2>
+
+Link : https://documenter.getpostman.com/view/24667557/2sAXqy2yao
+
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
