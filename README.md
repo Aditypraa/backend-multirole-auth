@@ -1,29 +1,73 @@
-<h1 align="center" id="title">Backend Multirole EXPRESS JS</h1>
+<h1 align="center"> Backend Multirole EXPRESS JS </h1>
 
-<p align="center"><img src="https://socialify.git.ci/Aditypraa/backend-multirole-auth/image?description=1&amp;descriptionEditable=Express.Js%2C%20Mysql%2C%20Sequelize%2C%20and%20Argon2&amp;forks=1&amp;issues=1&amp;language=1&amp;name=1&amp;owner=1&amp;pulls=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
+<p align="center"><img src="https://socialify.git.ci/Aditypraa/backend-multirole-auth/image?description=1&amp;descriptionEditable=Express.Js%2C%20Mysql%2C%20Sequelize%2C%20and%20Argon2&amp;forks=1&amp;issues=1&amp;language=1&amp;name=1&amp;owner=1&amp;pulls=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>  
 
-<p id="description">Proyek ini berfokus pada pengembangan backend yang aman dan handal untuk sistem otentikasi multi-peran. Dengan menggunakan teknologi seperti Express.js MySQL Sequelize dan Argon2 proyek ini akan menyediakan fungsionalitas berikut:</p>
+## Deskripsi
 
-<h2>📃 Dokumentasi Postman : </h2>
+Proyek ini berfokus pada pengembangan backend yang aman dan handal untuk sistem otentikasi multi-peran. Dengan menggunakan teknologi seperti Express.js, MySQL, Sequelize, dan Argon2, proyek ini menyediakan fungsionalitas berikut:
 
-Link : https://documenter.getpostman.com/view/24667557/2sAXqy2yao
+- **Otentikasi (Authentication):** Email dan Password
+- **Otorisasi (Authorization):** Admin dan User
+- **CRUD (Create, Read, Update, Delete) operations**
 
-<h2>🧐 Features</h2>
+## 📃 Dokumentasi Postman
 
-Here're some of the project's best features:
+Anda dapat menemukan dokumentasi API lengkap di: [https://documenter.getpostman.com/view/24667557/2sAXqy2yao](https://documenter.getpostman.com/view/24667557/2sAXqy2yao)
 
-- Authentication (Otentikasi) : Email dan Password
-- Authorization (Otorisasi) : Admin dan User
-- Create
-- Read
-- Update
-- Delete
+## 🖇️ Link Repository Frontend React.Js
 
-<h2>💻 Built with</h2>
+Anda dapat melihat codingan Frontend disini: [https://github.com/Aditypraa/frontend-multirole-auth](https://github.com/Aditypraa/frontend-multirole-auth)
 
-Technologies used in the project:
+## Fitur Utama
 
-- Node.Js
-- Express.Js
-- MySql
-- React.Js
+- **Otentikasi yang Aman:** Menggunakan Argon2 untuk hashing password yang kuat.
+- **Otorisasi Berbasis Peran:** Membatasi akses ke fitur berdasarkan peran pengguna (Admin atau User).
+- **CRUD Lengkap:** Menyediakan endpoint untuk membuat, membaca, memperbarui, dan menghapus data.
+- **Sesi yang Aman:** Menggunakan `express-session` dan `connect-session-sequelize` untuk mengelola sesi pengguna dengan aman.
+- **Dokumentasi API yang Jelas:** Dokumentasi Postman yang mudah diikuti untuk memahami dan menggunakan API.
+
+## Teknologi yang Digunakan
+
+- **Backend:**
+  - Node.js
+  - Express.js
+  - MySQL
+  - Sequelize (ORM untuk berinteraksi dengan MySQL)
+  - Argon2 (library untuk hashing password)
+  - `cookie-parser` (untuk mengelola cookies)
+  - `cors` (untuk mengaktifkan Cross-Origin Resource Sharing)
+  - `dotenv` (untuk mengelola variabel lingkungan)
+- **Frontend (opsional):**
+  - React.js (atau framework frontend lainnya)
+
+## Instalasi & Penggunaan
+
+1. **Kloning repositori:**
+
+   ```bash
+   git clone [https://github.com/Aditypraa/backend-multirole-auth.git](https://github.com/Aditypraa/backend-multirole-auth.git)
+   ```
+
+2. **Masuk ke Direktori Folder:**
+
+   ```bash
+   cd backend-multirole-auth
+   ```
+
+3. **Install dependensi:**
+
+   ```bash
+   npm install
+   ```
+
+4. **Konfigurasi database:**
+
+   ```bash
+   - Buat database MySQL sesuai kebutuhan.
+   - Sesuaikan konfigurasi database di file .env.
+   ```
+
+5. **Jalankan server:**
+   ```bash
+   npm run dev
+   ```
