@@ -3,9 +3,7 @@ import argon2 from "argon2";
 
 export const getAllUsers = async (req, res) => {
   try {
-    const response = await Users.findAll({
-      attributes: ["id", "uuid", "name", "email", "role"], // menampilkan data id, uuid, name, email, dan role
-    });
+    const response = await Users.findAll({ attributes: ["id", "uuid", "name", "email", "role"] }); // menampilkan data id, uuid, name, email, dan role
 
     res.status(200).json({ message: "Get all users", data: response }); // menampilkan pesan dan data user
 
@@ -18,7 +16,7 @@ export const getUserById = async (req, res) => {
   try {
     const response = await Users.findOne({
       attributes: ["id", "uuid", "name", "email", "role"], // menampilkan data id, uuid, name, email, dan role
-      where: { uuid: req.params.id }, // mencari user berdasarkan uuid
+      where: { uuid: req.params.id }, // mencari user berdasarkan uuid yang dicari (params.id)
     });
 
     res.status(200).json({ message: "Get user by id", data: response }); // menampilkan pesan dan data user
@@ -38,14 +36,14 @@ export const createUser = async (req, res) => {
   const hashPassword = await argon2.hash(password); // hash password menggunakan argon2
 
   try {
-    const response = await Users.create({ // membuat user baru
+    const createUser = await Users.create({ // membuat user baru
       name: name, // dengan data name
       email: email, // email
       password: hashPassword, // password yang sudah di hash
       role: role, // role
     });
 
-    res.status(201).json({ message: "Register success", data: response }); // menampilkan pesan dan data user yang berhasil dibuat
+    res.status(201).json({ message: "Register success", data: createUser }); // menampilkan pesan dan data user yang berhasil dibuat
 
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -83,7 +81,7 @@ export const updateUser = async (req, res) => {
       }
     );
 
-    const updatedUser = await Users.findOne({ where: { id: user.id } }); // mencari user berdasarkan id user yang dicari
+    const updatedUser = await Users.findOne({ where: { id: user.id } }); // mencari user berdasarkan id user yang dicari untuk menampilkan data user yang sudah diupdate
 
     res.status(200).json({ message: "Update user success", data: updatedUser }); // menampilkan pesan dan data user yang berhasil diupdate
   } catch (error) {

@@ -2,37 +2,47 @@ import Users from "../models/userModel.js";
 import argon2 from "argon2";
 
 export const signin = async (req, res) => {
-  const user = await Users.findOne({ where: { email: req.body.email } }); // mencari user berdasarkan email
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(400).json({ message: "Email and password are required" }); // jika email atau password kosong
 
-  if (!user) return res.status(404).json({ message: "User not found" }); // jika user tidak ditemukan, maka tampilkan pesan "User not found"
+    const user = await Users.findOne({ where: { email } });  // Mencari user berdasarkan email
+    if (!user) return res.status(404).json({ message: "User not found" }); // Jika user tidak ditemukan
 
-  const validPassword = await argon2.verify(user.password, req.body.password); // verifikasi password menggunakan argon2
+    const validPassword = await argon2.verify(user.password, password); // Verifikasi password menggunakan argon2
+    if (!validPassword)  return res.status(400).json({ message: "Invalid password" }); // Jika password tidak valid
+    
+    req.session.userId = user.uuid; // Set session userId dengan uuid user
+    const { uuid, name, role } = user; // Ambil data uuid, name, dan role dari user
 
-  if (!validPassword) return res.status(400).json({ message: "Invalid password" }); // jika password tidak valid, maka tampilkan pesan "Invalid password"
-
-  req.session.userId = user.uuid; // set session userId dengan uuid user
-  const uuid = user.uuid; // mengambil data uuid dari user
-  const name = user.name; // mengambil data name dari user
-  const email = user.email; // mengambil data email dari user
-  const role = user.role; // mengambil data role dari user
-
-  res
-    .status(200)
-    .json({ message: "Signin success", data: { uuid, name, email, role } }); // menampilkan pesan dan data user yang berhasil login
+    // Response berhasil login
+    res.status(200).json({message: "Signin success", data: { uuid, name, email, role }});
+    
+  } catch (error) {
+    // Tangani error
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 // Get user session
 export const getSession = async (req, res) => {
-  if (!req.session.userId) return res.status(404).json({ message: "User not found" }); // jika session userId tidak ada, maka tampilkan pesan "User not found"
+  try {
+    if (!req.session.userId) return res.status(404).json({ message: "User not found" }) // Jika session tidak ditemukan
 
-  const user = await Users.findOne({
-    attributes: ["uuid", "name", "email", "role"], // menampilkan data uuid, name, email, dan role
-    where: { uuid: req.session.userId }, // mencari user berdasarkan uuid session userId
-  });
+    const user = await Users.findOne({ // Mencari user berdasarkan uuid
+      attributes: ["uuid", "name", "email", "role"], // Hanya ambil data uuid, name, email, dan role
+      where: { uuid: req.session.userId }, // Filter berdasarkan uuid session
+    });
 
-  if (!user) return res.status(404).json({ message: "User not found" }); // jika user tidak ditemukan, maka tampilkan pesan "User not found"
-
-  res.status(200).json({ message: "Get session", data: user }); // menampilkan pesan dan data user yang sedang login
+    if (!user) return res.status(404).json({ message: "User not found" }); // Jika user tidak ditemukan
+  
+    res.status(200).json({ message: "Get session", data: user }); // Response berhasil
+     
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 export const signout = async (req, res) => {

@@ -7,8 +7,8 @@ export const verifyUser = async (req, res, next) => {
 
   const user = await Users.findOne({ where: { uuid: req.session.userId } }); // Cari user berdasarkan session userId
 
+  // Jika user tidak ditemukan
   if (!user) {
-    // Jika user tidak ditemukan
     return res.status(401).json({ message: "Akun Tidak Ditemukan" }); // Maka kembalikan response error
   }
   req.userId = user.id; // Set userId ke dalam request
@@ -19,13 +19,13 @@ export const verifyUser = async (req, res, next) => {
 export const adminOnly = async (req, res, next) => {
   const user = await Users.findOne({ where: { uuid: req.session.userId } }); // Cari user berdasarkan session userId
 
+  // Jika user tidak ditemukan
   if (!user) {
-    // Jika user tidak ditemukan
     return res.status(401).json({ message: "Akun Tidak Ditemukan" }); // Maka kembalikan response error
   }
 
+  // Jika user rolenya bukan admin
   if (user.role !== "admin") {
-    // Jika user rolenya bukan admin
     return res.status(401).json({ message: "Anda Tidak Memiliki Akses" }); // Maka kembalikan response error
   }
 
