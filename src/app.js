@@ -29,7 +29,12 @@ dbSequelize
   });
 
 // Middlewares
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["http://localhost:3000", "https://frontend-multirole-auth.netlify.app"],
+    credentials: true,
+  }
+));
 app.use(express.json()); // Untuk membaca request body berformat JSON
 app.use(express.urlencoded({ extended: true })); // Untuk membaca request body dari form URL encoded
 app.use(cookieParser())
